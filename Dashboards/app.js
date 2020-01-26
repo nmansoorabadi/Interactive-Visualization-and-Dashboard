@@ -41,6 +41,7 @@ metaData();
                
             const chartSample= data.samples;
             inputData=chartSample.filter(item => item.id === selSample);
+            inputData=inputData.reverse();
             const filData=inputData.slice(0,10);
             // Create the horizontal bar chart
             // Use sample_values as the values for the bar chart.
