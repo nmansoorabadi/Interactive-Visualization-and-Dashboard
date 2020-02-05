@@ -16,7 +16,7 @@ function LoadJsonData() {
 
     });
 
-}
+    }
 
 
 
@@ -43,28 +43,29 @@ function genPlot(inputData) {
     dataSet.forEach(sample => sample.id === inputData );
     console.log(dataSet);
 
+ 
     // const filData = dataSet.sort((a, b) => b - a).slice(0, 10);
     // Create the horizontal bar chart
     // Use sample_values as the values for the bar chart.
     // Use otu_ids as the labels for the bar chart.
     // Use otu_labels as the hovertext for the chart.
+    
     const sample_values= dataSet.map(data => data.sample_values)[0].slice(0, 10);
     console.log(sample_values);
     const otu_ids=dataSet.map(data => data.otu_ids)[0].slice(0, 10);
     console.log(otu_ids);
-    const otu_labels=  dataSet.map(data => data.otu_labels)[0].slice(0, 10);
+    const otu_labels = dataSet.map(data => data.otu_labels)[0].slice(0, 10);
     console.log(otu_labels);
-    // dataSet=dataSet.reverse();
-
+    dataSet=dataSet.reverse();
     const barTrace = {
             x: sample_values,
             y: otu_ids,
             text: otu_labels,
             type: 'bar',
             orientation: 'h'
-        },
-
-        layout = {
+        };
+        const barChartData=[barTrace];
+        var layout = {
         title: "Belly Button Bacteria",
             xaxis: {
                 title: "Sample Values"
@@ -74,7 +75,7 @@ function genPlot(inputData) {
             }
         };
 
-    Plotly.newPlot('bar', [barTrace], layout);
+    Plotly.newPlot("bar",barChartData, layout);
 
  
 
@@ -94,7 +95,7 @@ function genPlot(inputData) {
 
 
   
-    const bubbleTrace = [{
+    const bubbleTrace = {
             x: otu_ids,
             y: sample_values,
             mode: 'markers',
@@ -103,8 +104,11 @@ function genPlot(inputData) {
                 color:otu_ids,
             },
             text:otu_labels,
-        }],
-        layoutBubble = {
+        };
+
+        const bubbleData = [bubbleTrace];
+
+        var layoutBubble = {
             margin: {
                 t: 0     },
             title: "Belly Button Bacteria",
@@ -113,10 +117,10 @@ function genPlot(inputData) {
             },
             yaxis: {
                 title: "Sample Values"
-            }
+            },   
        };
 
-    Plotly.newPlot('bubble', bubbleTrace, layoutBubble);
+    Plotly.newPlot('bubble', bubbleData, layoutBubble);
    
 }
 
